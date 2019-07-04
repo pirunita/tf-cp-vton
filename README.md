@@ -10,7 +10,7 @@ https://tutorials.pytorch.kr/intermediate/spatial_transformer_tutorial.html
 This function is often used in building **Spatial Transformer Networks**. STN is a generalization of differentiable attentions to any space variation. The STN allows the neural network to learn how to perform input image space transformations to enhance the geometric invariance of the model. For example, you can crop, resize, and modify the area of interest in an image. This is a very useful mechanism because CNN is not invariant to rotation, size, and more general affine deformation.
 
 <p align="center">
-<img src="./src/spatial-transformer-structure.png" width="100%" height="100%"></p>
+<img src="./src/spatial-transformer-structure.png" width="70%" height="70%"></p>
 
 *One of the best things about STN is that it can be easily connected to existing CNNs with little modification.*
 
