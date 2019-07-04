@@ -17,6 +17,7 @@ This function is often used in building **Spatial Transformer Networks**. STN is
 * The localization network: takes the original image as an input and outputs the parameters of the transformation we want to apply.
 * The grid generator: generates a grid of coordinates in the input image corresponding to each pixel from the output image.
 * The sampler: generates the output image using the grid given by the grid generator.
+<br><br>
 
 ## Reference ##
 ### CP-VTON ###
