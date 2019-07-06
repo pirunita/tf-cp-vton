@@ -19,6 +19,20 @@ This function is often used in building **Spatial Transformer Networks**. STN is
 * The sampler: generates the output image using the grid given by the grid generator.
 <br><br>
 
+## Usage ##
+~~~
+└── tf-gmm
+    ├── data
+        ├── train_pairs.txt
+        └── train
+            ├── image
+            ├── pose
+            ├── segment
+            └── product_image
+	
+~~~
+
+
 ## Reference ##
 ### CP-VTON ###
 [1] https://github.com/sergeywong/cp-vton
