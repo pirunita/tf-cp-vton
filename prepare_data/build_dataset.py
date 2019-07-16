@@ -125,8 +125,8 @@ def process_dataset(args, image_metadata, prefix='train'):
     print("Launching %d threads for spacings: %s" % (num_threads, ranges))
     for thread_index in range(len(ranges)):
         argument = (args.data_root, args.output_dir, thread_index, 
-                    ranges, prefix, image_metadata, decoder, args)
-        t = threading.Thread(target=process_image_files, args=argument)
+                    ranges, prefix, image_metadata, decoder, args.train_shards)
+        t = threading.Thread(target=process_files, args=argument)
         t.start()
         threads.append(t)
     
@@ -134,10 +134,10 @@ def process_dataset(args, image_metadata, prefix='train'):
     print("%s: Finished processing all %d image pairs in data set '%s'." %
         (datetime.now(), len(image_metadata), prefix))
 
-def process_image_files(input_dir, output_dir,
-                        thread_index, ranges, prefix, 
-                        image_metadata, decoder,
-                        num_shards):
+def process_files(input_dir, output_dir,
+                  thread_index, ranges, prefix, 
+                  image_metadata, decoder,
+                  train_shards):
     """Process and save a subset of images as TFRecord files in one thread
 
     Args:
@@ -153,8 +153,8 @@ def process_image_files(input_dir, output_dir,
     """
 
     num_threads = len(ranges)
-    assert not num_shards % num_threads
-    num_shards_per_batch = int(num_shards / num_threads)
+    assert not train_shards % num_threads
+    num_shards_per_batch = int(train_shards / num_threads)
 
     shard_ranges = np.linspace(ranges[thread_index][0], ranges[thread_index][1],
                                num_shards_per_batch+1).astype(int)
@@ -163,7 +163,7 @@ def process_image_files(input_dir, output_dir,
     counter = 0
     for i in range(num_shards_per_batch):
         shard = thread_index * num_shards_per_batch + i
-        output_filename = '%s-%.5d-of-%.5d' % (prefix, shard, num_shards)
+        output_filename = '%s-%.5d-of-%.5d' % (prefix, shard, train_shards)
         output_file = os.path.join(output_dir, output_filename)
         tfrecord_writer = tf.python_io.TFRecordWriter(output_file)
 
@@ -211,5 +211,7 @@ def main():
 
         image_metadata = load_metadata(args)
         process_dataset(args, image_metadata)
+
+
 if __name__ == "__main__":
     main()
