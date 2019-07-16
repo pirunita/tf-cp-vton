@@ -37,6 +37,9 @@ This function is often used in building **Spatial Transformer Networks**. STN is
 ### CP-VTON ###
 [1] https://github.com/sergeywong/cp-vton
 
+### VITON ###
+[1] https://github.com/xthan/VITON
+
 ### spatial_transformer ###
 [1] http://torch.ch/blog/2015/09/07/spatial_transformers.html
 
