@@ -122,7 +122,7 @@ def process_dataset(args, image_metadata, prefix='train'):
     coord = tf.train.Coordinator()
     decoder = ImageDecoder()
 
-    print("Launching %d threads for spacings: %s" % (num_threads, ranges))
+    print('Launching %d threads for spacings: %s' % (num_threads, ranges))
     for thread_index in range(len(ranges)):
         argument = (args.data_root, args.output_dir, thread_index, 
                     ranges, prefix, image_metadata, decoder, args.train_shards)
